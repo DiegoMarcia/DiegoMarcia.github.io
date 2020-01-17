@@ -9,7 +9,7 @@
     
     const getContent = async function(name) {
       var myHeaders = new Headers();
-      myHeaders.append("Accept", "application/vnd.github.raw");
+      myHeaders.append("Accept", "application/vnd.github.html");
       var myInit = { method: 'GET', headers: myHeaders};
 
       let data = await fetch('https://api.github.com/repos/DiegoMarcia/DiegoMarcia.github.io/contents/' + name, myInit);
