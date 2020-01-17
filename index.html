@@ -29,7 +29,7 @@
       let filesList = await getContent('');
       let htmlString = '<ul>';
       for (let file of filesList) {
-        if (file.name.slice(-3) == "txt") {
+        if (file.name.slice(-3) == ".md") {
           let fileCont = await getContent(file.name);
           htmlString += `<li>${fileCont}</li>`;
         }
