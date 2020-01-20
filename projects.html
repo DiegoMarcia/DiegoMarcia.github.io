@@ -7,8 +7,12 @@
         }
         alert(location.hash);
       }
+
+      window.addEventListener('load', funcRef);
+      window.addEventListener('hashchange', funcRef);
     </script>
   </head>
+
   <body onhashchange="funcRef();">
     <a href="#chg">change hash</a>
   </body>
