@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>What's up, buddy?</title>
+
+  <script>
+    
+    const getContent = async function(name) {
+      var myHeaders = new Headers();
+      myHeaders.append("Accept", "application/vnd.github.html");
+      var myInit = { method: 'GET', headers: myHeaders};
+
+      let data = await fetch('https://api.github.com/repos/DiegoMarcia/DiegoMarcia.github.io/contents/' + name, myInit);
+
+      if (name == '') {
+        // folder
+        data = await data.json();
+      } else {
+        // file
+        data = await data.text();
+      }
+      
+      return(data);
+    };
+    
+    async function asyncCall() {
+      let filesList = await getContent('');
+      let htmlString = '<ul>';
+      for (let file of filesList) {
+        if (file.name.slice(-3) == ".md") {
+          let fileCont = await getContent(file.name);
+          htmlString += `<li>${fileCont}</li>`;
+        }
+      }
+      htmlString += '</ul>';
+      document.getElementsByTagName('body')[0].innerHTML = htmlString;
+    }
+    
+    asyncCall();
+  </script>
+</head>
+
+<body>
+.
+</body>
+
+</html> 
