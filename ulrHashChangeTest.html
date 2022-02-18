@@ -1,0 +1,19 @@
+<html>
+  <head>
+    <script>
+      function funcRef() {
+        if (location.hash === '#cool-feature') {
+          console.log("You're visiting a cool feature!");
+        }
+        alert(location.hash);
+      }
+
+      window.addEventListener('load', funcRef);
+      window.addEventListener('hashchange', funcRef);
+    </script>
+  </head>
+
+  <body onhashchange="funcRef();">
+    <a href="#chg">change hash</a>
+  </body>
+</html
