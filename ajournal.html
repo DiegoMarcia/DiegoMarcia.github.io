@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>My academic journal</title>
+
+  <script>
+    
+    const getContent = async function(name) {
+      var myHeaders = new Headers();
+      myHeaders.append("Accept", "application/vnd.github.v3.raw");
+      var myInit = { method: 'GET', headers: myHeaders};
+
+      let data = await fetch('https://api.github.com/repos/DiegoMarcia/DiegoMarcia.github.io/contents/' + name, myInit);
+
+      data = await data.text();
+      console.log(data);
+      
+      return(data);
+    };
+    
+    async function asyncCall() {
+      let journalEntries = await getContent('journal.csv');
+      parser(journalEntries);
+    }
+
+    function parser(journalEntries) {
+      let lbreak = journalEntries.split("\n");
+      lbreak.forEach(x => {
+          currentLine = x.split(";");
+          if (currentLine.length == 4) {
+            thisTable = makeTable(eval(currentLine[0]), eval(currentLine[2]), eval(currentLine[3]));
+            document.getElementById('journaldiv').innerHTML += thisTable;
+          }
+      });
+    }
+
+    function makeTable(date, title, description) {
+      return `  <div style="display:table-row;">
+   <div style="display:table-cell; border-right: 0.5em solid transparent;">
+  ${date}
+   </div>
+   <div style="display:table-cell; font-weight:bold;">
+  ${title}
+   </div>
+  </div>
+  
+  <div style="display:table-row;">
+   <div style="display:table-cell;">
+  &nbsp;
+   </div>
+   <div style="display:table-cell; border-bottom: 0.8em solid transparent;">
+  ${description}
+   </div>
+  </div>
+`
+    }
+    
+    asyncCall();
+  </script>
+</head>
+
+<body>
+  <div style="display:table; width:50em; background-color:#FFFFFF; text-align:justify; text-justify:inter-word;">
+   <div id="journaldiv" style="display:table-row-group;">
+   </div>
+  </div>
+</body>
+
+</html> 
