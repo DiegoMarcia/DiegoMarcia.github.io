@@ -1,1 +1,1 @@
-[My academic journal](https://diegomarcia.github.io/ajournal.html "My academic journal")
+[My academic log](https://diegomarcia.github.io/alog.html "My academic log")
